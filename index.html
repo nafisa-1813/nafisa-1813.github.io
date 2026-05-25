@@ -3,749 +3,1076 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nafisa Ali — AI Researcher & Writer</title>
+<title>Nafisa Ali</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Code+Pro:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --ink: #0d0d0d;
-    --paper: #f5f0e8;
-    --cream: #ede8da;
-    --accent: #c8531a;
-    --accent-light: #e8784a;
-    --muted: #7a7060;
-    --line: #d4cebe;
-    --card-bg: #faf7f2;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-
-  /* ── NOISE TEXTURE ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* ── HEADER ── */
-  header {
-    position: relative;
-    border-bottom: 1px solid var(--line);
-    padding: 0 clamp(1.5rem, 5vw, 5rem);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 64px;
-    z-index: 10;
-    background: var(--paper);
-  }
-
-  .logo {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  nav {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-  }
-
-  nav a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  nav a:hover { color: var(--accent); }
-
-  /* ── HERO ── */
-  .hero {
-    position: relative;
-    padding: clamp(5rem, 12vw, 10rem) clamp(1.5rem, 5vw, 5rem) clamp(4rem, 8vw, 7rem);
-    overflow: hidden;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .hero-eyebrow::before {
-    content: '';
-    width: 2rem;
-    height: 1px;
-    background: var(--accent);
-    display: block;
-  }
-
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(3.5rem, 9vw, 8rem);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    max-width: 14ch;
-    color: var(--ink);
-  }
-
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  .hero-sub {
-    margin-top: 2.5rem;
-    max-width: 44ch;
-    font-size: 1.05rem;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  .hero-cta {
-    margin-top: 3rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.75rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1px solid;
-    transition: all 0.25s;
-    cursor: pointer;
-  }
-
-  .btn-primary {
-    background: var(--ink);
-    color: var(--paper);
-    border-color: var(--ink);
-  }
-
-  .btn-primary:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--ink);
-    border-color: var(--line);
-  }
-
-  .btn-ghost:hover {
-    border-color: var(--ink);
-  }
-
-  /* big decorative number */
-  .hero-deco {
-    position: absolute;
-    right: clamp(2rem, 8vw, 8rem);
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(10rem, 20vw, 20rem);
-    color: var(--cream);
-    line-height: 1;
-    pointer-events: none;
-    user-select: none;
-    letter-spacing: -0.05em;
-  }
-
-  /* ── TICKER ── */
-  .ticker-wrap {
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    background: var(--cream);
-    overflow: hidden;
-    padding: 0.65rem 0;
-  }
-
-  .ticker-inner {
-    display: flex;
-    gap: 0;
-    animation: ticker 30s linear infinite;
-    white-space: nowrap;
-  }
-
-  .ticker-item {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    padding: 0 2rem;
-    flex-shrink: 0;
-  }
-
-  .ticker-item span {
-    color: var(--accent);
-    margin-right: 1.5rem;
-  }
-
-  @keyframes ticker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  /* ── SECTION LABEL ── */
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 3rem;
-  }
-
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-    max-width: 8rem;
-  }
-
-  /* ── FEATURED POST ── */
-  .featured-section {
-    padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
-    border-bottom: 1px solid var(--line);
-  }
-
-  .featured-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
-  }
-
-  @media (max-width: 768px) {
-    .featured-card { grid-template-columns: 1fr; gap: 2rem; }
-  }
-
-  .featured-tag {
-    display: inline-block;
-    background: var(--accent);
-    color: white;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.65rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .featured-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    text-decoration: none;
-    display: block;
-    transition: color 0.2s;
-  }
-
-  .featured-title:hover { color: var(--accent); }
-
-  .featured-excerpt {
-    margin-top: 1.25rem;
-    font-size: 1rem;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  .post-meta {
-    margin-top: 1.5rem;
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-  }
-
-  .featured-right {
-    border-left: 1px solid var(--line);
-    padding-left: 4rem;
-  }
-
-  @media (max-width: 768px) {
-    .featured-right { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 2rem; }
-  }
-
-  /* ── BLOG GRID ── */
-  .posts-section {
-    padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
-    border-bottom: 1px solid var(--line);
-  }
-
-  .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 0;
-    border: 1px solid var(--line);
-  }
-
-  .post-card {
-    padding: 2rem;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    transition: background 0.2s;
-    position: relative;
-    overflow: hidden;
-    background: var(--card-bg);
-  }
-
-  .post-card::after {
-    content: '→';
-    position: absolute;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    font-size: 1rem;
-    color: var(--accent);
-    opacity: 0;
-    transform: translateX(-8px);
-    transition: all 0.25s;
-  }
-
-  .post-card:hover {
-    background: white;
-  }
-
-  .post-card:hover::after {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .post-card-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.75rem;
-  }
-
-  .post-card-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.25rem;
-    line-height: 1.3;
-    color: var(--ink);
-    margin-bottom: 0.75rem;
-    transition: color 0.2s;
-  }
-
-  .post-card:hover .post-card-title { color: var(--accent); }
-
-  .post-card-excerpt {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.7;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .post-card-meta {
-    margin-top: 1.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-  }
-
-  /* ── ABOUT STRIP ── */
-  .about-section {
-    padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 4rem;
-    align-items: center;
-    border-bottom: 1px solid var(--line);
-  }
-
-  @media (max-width: 768px) {
-    .about-section { grid-template-columns: 1fr; gap: 2rem; }
-  }
-
-  .about-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-  }
-
-  .about-name em {
-    display: block;
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  .about-prose {
-    font-size: 1.05rem;
-    color: var(--muted);
-    line-height: 1.9;
-  }
-
-  .about-prose strong {
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  .about-links {
-    margin-top: 2rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    padding: 2rem clamp(1.5rem, 5vw, 5rem);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    border-top: 1px solid var(--line);
-  }
-
-  .footer-copy {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .footer-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .footer-links a:hover { color: var(--accent); }
-
-  /* ── ANIMATIONS ── */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── SIDE SERIES BAR ── */
-  .series-banner {
-    margin: 0 clamp(1.5rem, 5vw, 5rem) 0;
-    background: var(--ink);
-    color: var(--paper);
-    padding: 2rem 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .series-banner-text {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.4rem;
-    letter-spacing: -0.01em;
-  }
-
-  .series-banner-sub {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent-light);
-    margin-top: 0.3rem;
-  }
-
-  .post-number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--muted);
-    flex-shrink: 0;
-    margin-right: 0.75rem;
-  }
-
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --muted: #555;
+  --light: #999;
+  --border: #e8e8e8;
+  --accent: #1a56a0;
+  --accent-hover: #0d3d7a;
+  --accent-rgb: 26, 86, 160;
+  --tag-bg: #eef3fb;
+  --tag-color: #1a56a0;
+  --max: 740px;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Merriweather', Georgia, serif;
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; color: var(--accent-hover); }
+
+/* ── PROGRESS BAR ── */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--accent);
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* ── NAV ── */
+nav {
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  transition: box-shadow 0.3s;
+}
+
+nav.scrolled { box-shadow: 0 1px 20px rgba(0,0,0,0.06); }
+
+.nav-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.8rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+
+.nav-links a:hover { color: var(--accent); text-decoration: none; }
+.nav-links a:hover::after,
+.nav-links a.active::after { width: 100%; }
+.nav-links a.active { color: var(--accent); }
+
+/* ── CONTAINER ── */
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 5rem 0 3.5rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.hero-eyebrow {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 0.5s ease 0.1s forwards;
+}
+
+.hero h1 {
+  font-family: 'Merriweather', serif;
+  font-size: clamp(2rem, 5vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeUp 0.5s ease 0.2s forwards;
+}
+
+.hero-role {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-bottom: 1.4rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 0.5s ease 0.3s forwards;
+}
+
+.hero-role a { color: var(--accent); }
+
+/* Animated typing tagline */
+.hero-tagline {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.85;
+  max-width: 560px;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 0.5s ease 0.4s forwards;
+  min-height: 3.5rem;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--accent);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.hero-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 0.5s ease 0.5s forwards;
+}
+
+.hero-links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.85rem;
+  border-radius: 2px;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.hero-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--tag-bg);
+  text-decoration: none;
+}
+
+/* Floating dots decoration */
+.hero-dots {
+  position: absolute;
+  right: 0; top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(6, 10px);
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.8s forwards;
+}
+
+.hero-dots span {
+  width: 3px; height: 3px;
+  background: var(--border);
+  border-radius: 50%;
+  display: block;
+}
+
+.hero-dots span:nth-child(3n) { background: rgba(var(--accent-rgb), 0.3); }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+section:last-of-type { border-bottom: none; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--light);
+  white-space: nowrap;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* stagger children */
+.reveal-group > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.reveal-group.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay: 0s; }
+.reveal-group.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay: 0.07s; }
+.reveal-group.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay: 0.14s; }
+.reveal-group.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay: 0.21s; }
+.reveal-group.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay: 0.28s; }
+.reveal-group.visible > *:nth-child(6) { opacity:1; transform:none; transition-delay: 0.35s; }
+.reveal-group.visible > *:nth-child(n+7) { opacity:1; transform:none; transition-delay: 0.42s; }
+
+/* ── NEWS ── */
+.news-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid transparent;
+  font-size: 0.88rem;
+  align-items: baseline;
+  transition: border-color 0.2s;
+}
+
+.news-item:hover { border-bottom-color: var(--border); }
+
+.news-item:last-child { border-bottom: none; }
+
+.news-date {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.72rem;
+  color: var(--light);
+  flex-shrink: 0;
+  width: 78px;
+}
+
+.news-text { color: var(--text); line-height: 1.65; }
+.news-text a { color: var(--accent); }
+
+.news-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.1rem 0.4rem;
+  border-radius: 2px;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+/* ── WRITING CARDS ── */
+.writing-item {
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  transition: all 0.25s ease;
+  cursor: default;
+}
+
+.writing-item:last-child { border-bottom: none; }
+
+.writing-item::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s ease;
+}
+
+.writing-item:hover::before { transform: scaleY(1); }
+
+.writing-item:hover {
+  padding-left: 0.75rem;
+}
+
+.writing-meta {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.7rem;
+  color: var(--light);
+  margin-bottom: 0.35rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.writing-tag {
+  display: inline-block;
+  background: var(--tag-bg);
+  color: var(--tag-color);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.12rem 0.45rem;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+
+.writing-item:hover .writing-tag {
+  background: rgba(var(--accent-rgb), 0.15);
+}
+
+.writing-title {
+  font-family: 'Merriweather', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 0.45rem;
+}
+
+.writing-title a { color: var(--text); transition: color 0.2s; }
+.writing-title a:hover { color: var(--accent); text-decoration: none; }
+
+.writing-excerpt {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.8;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.writing-item:hover .writing-excerpt {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.writing-read-more {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.73rem;
+  color: var(--accent);
+  margin-top: 0.5rem;
+  display: none;
+}
+
+.writing-item:hover .writing-read-more { display: block; }
+
+/* ── SERIES ACCORDION ── */
+.series-block {
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.series-header {
+  padding: 1rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: var(--tag-bg);
+  transition: background 0.2s;
+  user-select: none;
+}
+
+.series-header:hover { background: rgba(var(--accent-rgb), 0.1); }
+
+.series-header-left { flex: 1; }
+
+.series-header-title {
+  font-family: 'Merriweather', serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.series-header-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+.series-toggle {
+  font-size: 1rem;
+  color: var(--accent);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.series-block.open .series-toggle { transform: rotate(45deg); }
+
+.series-chapters {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.series-block.open .series-chapters { max-height: 400px; }
+
+.series-chapter {
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem 1.2rem;
+  border-top: 1px solid var(--border);
+  align-items: baseline;
+  font-size: 0.84rem;
+  transition: background 0.2s;
+}
+
+.series-chapter:hover { background: #fafafa; }
+
+.ch-num {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.68rem;
+  color: var(--light);
+  flex-shrink: 0;
+  width: 30px;
+}
+
+.series-chapter a { color: var(--text); }
+.series-chapter a:hover { color: var(--accent); text-decoration: none; }
+
+/* ── INTERESTS ── */
+.interests-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.interest-pill {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  color: var(--muted);
+  background: #f5f5f5;
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  cursor: default;
+  transition: all 0.2s;
+}
+
+.interest-pill:hover {
+  background: var(--tag-bg);
+  border-color: rgba(var(--accent-rgb), 0.4);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* ── ABOUT ── */
+.about-text {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+.about-text p { margin-bottom: 1rem; }
+.about-text p:last-child { margin-bottom: 0; }
+
+.highlight-box {
+  border-left: 2px solid var(--accent);
+  padding: 0.9rem 1.2rem;
+  background: var(--tag-bg);
+  margin: 1.5rem 0;
+  font-size: 0.87rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.highlight-box:hover { background: rgba(var(--accent-rgb), 0.07); }
+
+.highlight-box .label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+.highlight-box p { color: var(--muted); line-height: 1.75; margin: 0; }
+
+/* ── TIMELINE ── */
+.timeline {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 6px; bottom: 6px;
+  width: 1px;
+  background: var(--border);
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 1.3rem;
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 6px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: white;
+  border: 1.5px solid var(--border);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.tl-item:hover::before {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.tl-date {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.68rem;
+  color: var(--light);
+  margin-bottom: 0.15rem;
+}
+
+.tl-role {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.tl-org {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ── PERSONAL ── */
+.personal-note {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 2.5rem 0 3rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  color: var(--light);
+  text-align: center;
+}
+
+footer a { color: var(--light); transition: color 0.2s; }
+footer a:hover { color: var(--accent); text-decoration: none; }
+
+.footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 0.75rem; }
+
+/* ── BACK TO TOP ── */
+#back-top {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  width: 36px; height: 36px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 50;
+}
+
+#back-top.visible { opacity: 1; transform: translateY(0); }
+#back-top:hover { background: var(--accent-hover); }
+
+/* ── RESPONSIVE ── */
+@media(max-width: 600px) {
+  nav { padding: 0.8rem 1rem; }
+  .nav-links { gap: 1rem; }
+  .hero-dots { display: none; }
+}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="logo">nafisa ali / writing</div>
-  <nav>
-    <a href="#posts">Posts</a>
-    <a href="#series">Series</a>
-    <a href="#about">About</a>
-    <a href="https://medium.com/@nafisaali.ec17" target="_blank">Medium ↗</a>
-  </nav>
-</header>
+<div id="progress-bar"></div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-eyebrow">Writing on AI & beyond</div>
-  <h1>Thoughts on <em>intelligent</em> machines</h1>
-  <p class="hero-sub">
-    I read, write, and code — with a persistent curiosity about how AI systems think, learn, and fail. 
-    This is where I share it.
-  </p>
-  <div class="hero-cta">
-    <a href="#posts" class="btn btn-primary">Read the posts</a>
-    <a href="https://medium.com/@nafisaali.ec17" target="_blank" class="btn btn-ghost">Follow on Medium ↗</a>
+<nav id="main-nav">
+  <a href="#" class="nav-name">Nafisa Ali</a>
+  <ul class="nav-links">
+    <li><a href="#news">News</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#personal">Personal</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero" id="hero">
+    <div class="hero-dots" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="hero-eyebrow">Data Scientist · Writer · Researcher</div>
+    <h1>Nafisa Ali</h1>
+    <div class="hero-role">
+      <a href="https://www.deloitte.com" target="_blank">Deloitte</a> &nbsp;·&nbsp;
+      M.S. Data Science, <a href="https://datascience.columbia.edu" target="_blank">Columbia University</a>
+    </div>
+    <p class="hero-tagline"><span id="typed-text"></span><span class="cursor"></span></p>
+    <div class="hero-links">
+      <a href="mailto:nafisaali.ec17@gmail.com">Email</a>
+      <a href="https://github.com/nafisa-1813" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/nafisaali26/" target="_blank">LinkedIn</a>
+      <a href="https://medium.com/@nafisaali.ec17" target="_blank">Medium</a>
+      <a href="https://substack.com/@nafisa1813" target="_blank">Substack</a>
+    </div>
   </div>
-  <div class="hero-deco" aria-hidden="true">AI</div>
-</section>
 
-<!-- TICKER -->
-<div class="ticker-wrap" aria-hidden="true">
-  <div class="ticker-inner">
-    <span class="ticker-item"><span>✦</span> AI Alignment</span>
-    <span class="ticker-item"><span>✦</span> Agentic Systems</span>
-    <span class="ticker-item"><span>✦</span> Interpretability</span>
-    <span class="ticker-item"><span>✦</span> Transformer Architectures</span>
-    <span class="ticker-item"><span>✦</span> Memory & Reasoning</span>
-    <span class="ticker-item"><span>✦</span> LLMs in Space Tech</span>
-    <span class="ticker-item"><span>✦</span> Evaluation Frameworks</span>
-    <span class="ticker-item"><span>✦</span> AI Ethics</span>
-    <span class="ticker-item"><span>✦</span> AI Alignment</span>
-    <span class="ticker-item"><span>✦</span> Agentic Systems</span>
-    <span class="ticker-item"><span>✦</span> Interpretability</span>
-    <span class="ticker-item"><span>✦</span> Transformer Architectures</span>
-    <span class="ticker-item"><span>✦</span> Memory & Reasoning</span>
-    <span class="ticker-item"><span>✦</span> LLMs in Space Tech</span>
-    <span class="ticker-item"><span>✦</span> Evaluation Frameworks</span>
-    <span class="ticker-item"><span>✦</span> AI Ethics</span>
-  </div>
-</div>
+  <!-- NEWS -->
+  <section id="news">
+    <div class="section-header reveal">
+      <div class="section-title">News &amp; Highlights</div>
+      <div class="section-line"></div>
+    </div>
 
-<!-- FEATURED POST -->
-<section class="featured-section fade-up" id="featured">
-  <div class="section-label">Latest</div>
-  <div class="featured-card">
-    <div class="featured-left">
-      <div class="featured-tag">AI Alignment · May 2026</div>
-      <a href="https://medium.com/@nafisaali.ec17/a-critical-reading-of-what-failure-looks-like-b18bc4fc4d85" target="_blank" class="featured-title">
-        A Critical Reading of 'What Failure Looks Like'
-      </a>
-      <p class="featured-excerpt">
-        A close reading of Paul Christiano's 2019 Alignment Forum post — unpacking his two failure scenarios for misaligned AI and examining what they still get right (and wrong) today.
+    <div class="reveal-group">
+
+      <div class="news-item">
+        <span class="news-date">May 2026</span>
+        <span class="news-text">
+          <span class="news-badge">New</span>
+          Published <a href="https://medium.com/@nafisaali.ec17/a-critical-reading-of-what-failure-looks-like-b18bc4fc4d85" target="_blank">a critical reading of Paul Christiano's "What Failure Looks Like"</a> — revisiting the Alignment Forum post that shaped AI safety discourse.
+        </span>
+      </div>
+
+      <div class="news-item">
+        <span class="news-date">Apr 2026</span>
+        <span class="news-text">New essay: <a href="https://medium.com/@nafisaali.ec17/inside-the-social-mind-of-an-ai-can-interpretability-methods-identify-social-cognition-circuits-49bd24c9f6c3" target="_blank">Inside the Social Mind of an AI</a> — can mechanistic interpretability methods find social cognition circuits in LLMs?</span>
+      </div>
+
+      <div class="news-item">
+        <span class="news-date">Apr 2026</span>
+        <span class="news-text">Published <a href="https://medium.com/@nafisaali.ec17/agentic-ai-evaluation-definitions-metrics-and-frameworks-fb8c64fe3e29" target="_blank">Agentic AI Evaluation: Definitions, Metrics, and Frameworks</a> — a survey of how we measure autonomous AI systems.</span>
+      </div>
+
+      <div class="news-item">
+        <span class="news-date">Feb 2026</span>
+        <span class="news-text">Essay on <a href="https://medium.com/@nafisaali.ec17/large-language-models-and-transformer-architectures-in-space-technology-and-astronomy-a-3dd9d994cb36" target="_blank">LLMs and Transformer Architectures in Space Technology and Astronomy</a>.</span>
+      </div>
+
+      <div class="news-item">
+        <span class="news-date">Jan 2026</span>
+        <span class="news-text">Completed a 6-chapter series on <a href="#writing">Agentic AI Systems</a> — learning, memory, reasoning, tools, and ethics.</span>
+      </div>
+
+      <div class="news-item">
+        <span class="news-date">2024</span>
+        <span class="news-text">
+          Featured by <strong>Columbia University Data Science Institute</strong> for Women's History Month —
+          <a href="https://universitylife.columbia.edu/news/nafisa-ali-engineering-and-womens-right-education-and-healthcare" target="_blank">on engineering and women's right to education and healthcare →</a>
+        </span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section id="writing">
+    <div class="section-header reveal">
+      <div class="section-title">Writing</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="reveal-group">
+
+      <div class="writing-item">
+        <div class="writing-meta">
+          <span>2026</span>
+          <span class="writing-tag">On-site · Technical</span>
+        </div>
+        <div class="writing-title"><a href="transformers-deep-dive.html">How Transformers Work — A Deep Dive</a></div>
+        <div class="writing-excerpt">
+          A thorough technical walkthrough of transformer architecture: from token embeddings and positional encodings through
+          multi-head self-attention, feedforward layers, and normalization — with annotated diagrams and mathematical derivations.
+        </div>
+        <div class="writing-read-more"><a href="transformers-deep-dive.html">Read on this site →</a></div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-meta">
+          <span>May 2026</span>
+          <span class="writing-tag">AI Safety</span>
+        </div>
+        <div class="writing-title"><a href="https://medium.com/@nafisaali.ec17/a-critical-reading-of-what-failure-looks-like-b18bc4fc4d85" target="_blank">A Critical Reading of 'What Failure Looks Like'</a></div>
+        <div class="writing-excerpt">
+          Paul Christiano's 2019 Alignment Forum post described two distinct scenarios for AI misalignment failure.
+          This piece revisits them — examining what holds up, what has been superseded, and why the post remains essential reading.
+        </div>
+        <div class="writing-read-more"><a href="https://medium.com/@nafisaali.ec17/a-critical-reading-of-what-failure-looks-like-b18bc4fc4d85" target="_blank">Read on Medium →</a></div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-meta">
+          <span>Apr 2026</span>
+          <span class="writing-tag">Interpretability</span>
+        </div>
+        <div class="writing-title"><a href="https://medium.com/@nafisaali.ec17/inside-the-social-mind-of-an-ai-can-interpretability-methods-identify-social-cognition-circuits-49bd24c9f6c3" target="_blank">Inside the Social Mind of an AI: Can Interpretability Methods Identify "Social Cognition Circuits"?</a></div>
+        <div class="writing-excerpt">
+          Can we see how AI thinks — and does what it thinks resemble human social reasoning?
+          This essay surveys mechanistic interpretability tools and asks what they reveal about theory-of-mind and emergent social cognition in LLMs.
+        </div>
+        <div class="writing-read-more"><a href="https://medium.com/@nafisaali.ec17/inside-the-social-mind-of-an-ai-can-interpretability-methods-identify-social-cognition-circuits-49bd24c9f6c3" target="_blank">Read on Medium →</a></div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-meta">
+          <span>Apr 2026</span>
+          <span class="writing-tag">Evaluation</span>
+        </div>
+        <div class="writing-title"><a href="https://medium.com/@nafisaali.ec17/agentic-ai-evaluation-definitions-metrics-and-frameworks-fb8c64fe3e29" target="_blank">Agentic AI Evaluation: Definitions, Metrics, and Frameworks</a></div>
+        <div class="writing-excerpt">
+          How do we know if an autonomous AI system is actually working? Built up from first principles —
+          defining agentic behavior, surveying evaluation metrics, and assessing formal frameworks for systems that plan, act, and react.
+        </div>
+        <div class="writing-read-more"><a href="https://medium.com/@nafisaali.ec17/agentic-ai-evaluation-definitions-metrics-and-frameworks-fb8c64fe3e29" target="_blank">Read on Medium →</a></div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-meta">
+          <span>Feb 2026</span>
+          <span class="writing-tag">LLMs · Space</span>
+        </div>
+        <div class="writing-title"><a href="https://medium.com/@nafisaali.ec17/large-language-models-and-transformer-architectures-in-space-technology-and-astronomy-a-3dd9d994cb36" target="_blank">LLMs and Transformer Architectures in Space Technology and Astronomy</a></div>
+        <div class="writing-excerpt">
+          A rigorous mathematical treatment of how LLMs apply to space technology and astronomy —
+          from telescope data interpretation to mission planning, with attention to domain-specific constraints.
+        </div>
+        <div class="writing-read-more"><a href="https://medium.com/@nafisaali.ec17/large-language-models-and-transformer-architectures-in-space-technology-and-astronomy-a-3dd9d994cb36" target="_blank">Read on Medium →</a></div>
+      </div>
+
+      <!-- SERIES ACCORDION -->
+      <div class="writing-item" style="cursor:default;">
+        <div class="writing-meta">
+          <span>Jan 2026</span>
+          <span class="writing-tag">Series · 6 chapters</span>
+        </div>
+        <div class="writing-title">AI Agents: A Complete Series</div>
+        <div class="series-block" id="series-block">
+          <div class="series-header" onclick="toggleSeries()">
+            <div class="series-header-left">
+              <div class="series-header-title">Expand all 6 chapters</div>
+              <div class="series-header-sub">Learning · Memory · Reasoning · Tools · Ethics</div>
+            </div>
+            <span class="series-toggle">+</span>
+          </div>
+          <div class="series-chapters">
+            <div class="series-chapter"><span class="ch-num">Ch 3</span><a href="https://medium.com/@nafisaali.ec17/chapter-3-learning-adaptation-in-agents-925ae42a3fc3" target="_blank">Learning &amp; Adaptation in Agents</a></div>
+            <div class="series-chapter"><span class="ch-num">Ch 3.1</span><a href="https://medium.com/@nafisaali.ec17/chapter-3-1-learning-adaptation-in-agents-in-depth-understanding-b178bfef6b02" target="_blank">Learning &amp; Adaptation — In-Depth</a></div>
+            <div class="series-chapter"><span class="ch-num">Ch 4</span><a href="https://medium.com/@nafisaali.ec17/chapter-4-memory-knowledge-and-reasoning-in-intelligent-agents-81586d7ddf17" target="_blank">Memory, Knowledge &amp; Reasoning</a></div>
+            <div class="series-chapter"><span class="ch-num">Ch 4.1</span><a href="https://medium.com/@nafisaali.ec17/chapter-4-1-memory-architectures-on-the-move-three-recent-short-takes-c6784ba202d0" target="_blank">Memory Architectures on the Move</a></div>
+            <div class="series-chapter"><span class="ch-num">Ch 5</span><a href="https://medium.com/@nafisaali.ec17/chapter-5-agentic-ai-in-practice-tools-frameworks-and-platforms-1b5180334081" target="_blank">Tools, Frameworks &amp; Platforms</a></div>
+            <div class="series-chapter"><span class="ch-num">Ch 6</span><a href="https://medium.com/@nafisaali.ec17/chapter-6-ai-agents-future-directions-challenges-and-ethical-considerations-final-chapter-a708e1c4736c" target="_blank">Future Directions, Challenges &amp; Ethics</a></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INTERESTS -->
+  <section id="interests">
+    <div class="section-header reveal">
+      <div class="section-title">Research Interests</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="interests-wrap reveal">
+      <span class="interest-pill">AI Alignment &amp; Safety</span>
+      <span class="interest-pill">Agentic AI Systems</span>
+      <span class="interest-pill">Mechanistic Interpretability</span>
+      <span class="interest-pill">Transformer Architectures</span>
+      <span class="interest-pill">Memory &amp; Reasoning in LLMs</span>
+      <span class="interest-pill">AI Evaluation Frameworks</span>
+      <span class="interest-pill">Quantum Computing &amp; QNN</span>
+      <span class="interest-pill">Brain-Computer Interfaces</span>
+      <span class="interest-pill">LLMs in Science &amp; Space</span>
+      <span class="interest-pill">Women in Engineering</span>
+      <span class="interest-pill">NLP</span>
+      <span class="interest-pill">Signal Processing</span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header reveal">
+      <div class="section-title">About</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-text reveal">
+      <p>
+        I am a Data Scientist at <strong>Deloitte</strong> and hold an M.S. in Data Science from
+        <strong>Columbia University's Data Science Institute</strong>, where I was also a
+        University Life Ambassador and Executive Secretary of the Columbia Consulting Association.
       </p>
-      <div class="post-meta">
-        <span>May 17, 2026</span>
-        <span>·</span>
-        <span>Critical Analysis</span>
+      <p>
+        My technical work has spanned scalable ML pipelines for battery state-of-health estimation,
+        NLP automation for pharmaceutical authoring workflows, and EEG signal processing for stress
+        and emotion detection. I am drawn to problems where rigorous mathematics meets real-world constraints.
+      </p>
+      <p>
+        Outside of ML, I care about the structural conditions that allow people — especially women —
+        to participate fully in science and engineering. I was featured by Columbia's Data Science Institute
+        for Women's History Month, speaking about <a href="https://universitylife.columbia.edu/news/nafisa-ali-engineering-and-womens-right-education-and-healthcare" target="_blank">engineering and women's right to education and healthcare</a>.
+      </p>
+      <p>
+        I write about AI — its architecture, its safety, its social consequences — because the people building
+        these systems have an obligation to think carefully about what they are actually making.
+      </p>
+
+      <div class="highlight-box">
+        <div class="label">&#9733; Columbia University Feature</div>
+        <p>Featured by the Columbia DSI for Women's History Month — on growing up in a system that told girls engineering wasn't for them, and why that needs to change. <a href="https://universitylife.columbia.edu/news/nafisa-ali-engineering-and-womens-right-education-and-healthcare" target="_blank">Read the interview →</a></p>
+      </div>
+
+      <div class="section-title" style="margin: 1.5rem 0 1rem;">Experience</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">2024 – Present</div>
+          <div class="tl-role">Data Scientist</div>
+          <div class="tl-org">Deloitte</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2022 – 2024</div>
+          <div class="tl-role">M.S. Data Science</div>
+          <div class="tl-org">Columbia University · Data Science Institute</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Prior</div>
+          <div class="tl-role">Technical Writer &amp; ML Engineer</div>
+          <div class="tl-org">C++, Python, Java · NLP · Signal Processing</div>
+        </div>
       </div>
     </div>
-    <div class="featured-right">
-      <div class="featured-tag">Interpretability · Apr 2026</div>
-      <a href="https://medium.com/@nafisaali.ec17/inside-the-social-mind-of-an-ai-can-interpretability-methods-identify-social-cognition-circuits-49bd24c9f6c3" target="_blank" class="featured-title" style="font-size: clamp(1.4rem, 2.5vw, 2rem);">
-        Inside the Social Mind of an AI
-      </a>
-      <p class="featured-excerpt">
-        Can mechanistic interpretability reveal "social cognition circuits" inside large language models? This piece digs into whether we can see how AI thinks — and whether what it thinks looks human.
+  </section>
+
+  <!-- PERSONAL -->
+  <section id="personal">
+    <div class="section-header reveal">
+      <div class="section-title">Personal</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="reveal">
+      <p class="personal-note">
+        This is where I write more freely — things that don't fit neatly into research.
+        I also post on <a href="https://substack.com/@nafisa1813" target="_blank">Substack</a>,
+        which I'm treating as a little project: quality content without the pressure of a format.
       </p>
-      <div class="post-meta">
-        <span>Apr 30, 2026</span>
-        <span>·</span>
-        <span>Interpretability</span>
+
+      <div class="highlight-box">
+        <div class="label">On being a woman in engineering</div>
+        <p>
+          "Most girls at a very young age are told that engineering is not a girl thing. I made my way to engineering
+          because of my supportive and educated family — and that is the exact reason why education is important:
+          it makes people open-minded and helps mitigate stereotypes of all sorts."
+          <br><br>
+          — from my <a href="https://universitylife.columbia.edu/news/nafisa-ali-engineering-and-womens-right-education-and-healthcare" target="_blank">Columbia University Life interview</a>
+        </p>
+      </div>
+
+      <div class="writing-item" style="padding-top:0;">
+        <div class="writing-meta"><span>Ongoing</span><span class="writing-tag">Substack</span></div>
+        <div class="writing-title"><a href="https://substack.com/@nafisa1813" target="_blank">Notes &amp; Fragments</a></div>
+        <div class="writing-excerpt">
+          Shorter, more personal writing. Thoughts on what I'm reading, questions I'm sitting with,
+          and occasional takes on AI and the world. More informal than the essays above.
+        </div>
+        <div class="writing-read-more"><a href="https://substack.com/@nafisa1813" target="_blank">Read on Substack →</a></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SERIES BANNER -->
-<div class="series-banner fade-up" id="series">
-  <div>
-    <div class="series-banner-text">The AI Agents Series</div>
-    <div class="series-banner-sub">A 6-chapter deep dive into intelligent agent systems</div>
-  </div>
-  <a href="https://medium.com/@nafisaali.ec17" target="_blank" class="btn btn-ghost" style="color: var(--paper); border-color: rgba(255,255,255,0.25);">Read Series ↗</a>
 </div>
 
-<!-- POSTS GRID -->
-<section class="posts-section fade-up" id="posts">
-  <div class="section-label">All Writing</div>
-  <div class="posts-grid">
-
-    <a href="https://medium.com/@nafisaali.ec17/agentic-ai-evaluation-definitions-metrics-and-frameworks-fb8c64fe3e29" target="_blank" class="post-card">
-      <div class="post-card-tag">Evaluation · Apr 3, 2026</div>
-      <div class="post-card-title">Agentic AI Evaluation: Definitions, Metrics, and Frameworks</div>
-      <div class="post-card-excerpt">A comprehensive look at how we measure agentic AI — from foundational definitions to practical evaluation frameworks for autonomous systems.</div>
-      <div class="post-card-meta">Apr 2026 · Evaluation</div>
-    </a>
-
-    <a href="https://medium.com/@nafisaali.ec17/large-language-models-and-transformer-architectures-in-space-technology-and-astronomy-a-3dd9d994cb36" target="_blank" class="post-card">
-      <div class="post-card-tag">LLMs · Feb 2026</div>
-      <div class="post-card-title">LLMs & Transformer Architectures in Space Technology</div>
-      <div class="post-card-excerpt">A rigorous mathematical and theoretical analysis of how Large Language Models apply to space technology and astronomy — an unexpected but fascinating intersection.</div>
-      <div class="post-card-meta">Feb 2026 · Space & AI</div>
-    </a>
-
-    <a href="https://medium.com/@nafisaali.ec17/chapter-6-ai-agents-future-directions-challenges-and-ethical-considerations-final-chapter-a708e1c4736c" target="_blank" class="post-card">
-      <div class="post-card-tag">Agents Series · Ch. 6</div>
-      <div class="post-card-title">Chapter 6: Future Directions, Challenges & Ethics of AI Agents</div>
-      <div class="post-card-excerpt">The final chapter in the series. On the horizon of autonomous AI — the open problems, ethical stakes, and what it means to build responsibly at this scale.</div>
-      <div class="post-card-meta">Jan 2026 · AI Ethics</div>
-    </a>
-
-    <a href="https://medium.com/@nafisaali.ec17/chapter-5-agentic-ai-in-practice-tools-frameworks-and-platforms-1b5180334081" target="_blank" class="post-card">
-      <div class="post-card-tag">Agents Series · Ch. 5</div>
-      <div class="post-card-title">Chapter 5: Agentic AI in Practice — Tools, Frameworks & Platforms</div>
-      <div class="post-card-excerpt">From classic RL toolkits to new LLM-powered agentic ecosystems — a practical survey of what exists and how it works.</div>
-      <div class="post-card-meta">Jan 2026 · Tools</div>
-    </a>
-
-    <a href="https://medium.com/@nafisaali.ec17/chapter-4-1-memory-architectures-on-the-move-three-recent-short-takes-c6784ba202d0" target="_blank" class="post-card">
-      <div class="post-card-tag">Agents Series · Ch. 4.1</div>
-      <div class="post-card-title">Chapter 4.1: Memory Architectures on the Move</div>
-      <div class="post-card-excerpt">Three recent short takes on the state of memory in AI agents — why memory is becoming the real brain of the system.</div>
-      <div class="post-card-meta">Jan 2026 · Memory</div>
-    </a>
-
-    <a href="https://medium.com/@nafisaali.ec17/chapter-4-memory-knowledge-and-reasoning-in-intelligent-agents-81586d7ddf17" target="_blank" class="post-card">
-      <div class="post-card-tag">Agents Series · Ch. 4</div>
-      <div class="post-card-title">Chapter 4: Memory, Knowledge & Reasoning in Intelligent Agents</div>
-      <div class="post-card-excerpt">How intelligent agents juggle raw perception, stored knowledge, and multi-step reasoning — the cognitive machinery inside agentic systems.</div>
-      <div class="post-card-meta">Jan 2026 · Reasoning</div>
-    </a>
-
-    <a href="https://medium.com/@nafisaali.ec17/chapter-3-1-learning-adaptation-in-agents-in-depth-understanding-b178bfef6b02" target="_blank" class="post-card">
-      <div class="post-card-tag">Agents Series · Ch. 3.1</div>
-      <div class="post-card-title">Chapter 3.1: Learning & Adaptation in Agents — In-Depth</div>
-      <div class="post-card-excerpt">A deeper dive into how modern machine learning enables agents to learn and adapt — with mathematical rigor and plenty of intuition.</div>
-      <div class="post-card-meta">Jan 2026 · Learning</div>
-    </a>
-
-    <a href="https://medium.com/@nafisaali.ec17/chapter-3-learning-adaptation-in-agents-925ae42a3fc3" target="_blank" class="post-card">
-      <div class="post-card-tag">Agents Series · Ch. 3</div>
-      <div class="post-card-title">Chapter 3: Learning & Adaptation in Agents</div>
-      <div class="post-card-excerpt">The story of how agents learn — many ML flavours working together, from supervised baselines to reinforcement signals and beyond.</div>
-      <div class="post-card-meta">Jan 2026 · Learning</div>
-    </a>
-
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about-section fade-up" id="about">
-  <div>
-    <div class="about-name">Nafisa<em>Ali</em></div>
-  </div>
-  <div>
-    <p class="about-prose">
-      Hello! I'm <strong>Nafisa Ali</strong> (she/her) — an AI researcher and writer with a hunger for knowledge that refuses to stay contained. 
-      I read voraciously, write carefully, and code whenever something needs testing.<br><br>
-      My writing lives at the intersection of <strong>AI safety, interpretability, agentic systems, and the deeper question</strong> 
-      of what it means to build machines that think. I try to be rigorous without losing the human thread 
-      — because the best technical writing should be a pleasure to read.<br><br>
-      If something here sparked a thought, reach out.
-    </p>
-    <div class="about-links">
-      <a href="https://medium.com/@nafisaali.ec17" target="_blank" class="btn btn-primary">Medium Profile ↗</a>
-      <a href="https://github.com/nafisa-1813" target="_blank" class="btn btn-ghost">GitHub ↗</a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <div class="footer-copy">© 2026 Nafisa Ali — All posts link to Medium</div>
-  <div class="footer-links">
-    <a href="https://medium.com/@nafisaali.ec17" target="_blank">Medium</a>
-    <a href="https://github.com/nafisa-1813" target="_blank">GitHub</a>
+  <div class="container">
+    <div class="footer-links">
+      <a href="https://github.com/nafisa-1813" target="_blank">GitHub</a>
+      <a href="https://medium.com/@nafisaali.ec17" target="_blank">Medium</a>
+      <a href="https://substack.com/@nafisa1813" target="_blank">Substack</a>
+      <a href="https://www.linkedin.com/in/nafisaali26/" target="_blank">LinkedIn</a>
+    </div>
+    Nafisa Ali &nbsp;·&nbsp; Built with plain HTML &nbsp;·&nbsp; Hosted on GitHub Pages
   </div>
 </footer>
 
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
 <script>
-  // Scroll fade-in
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
+// ── PROGRESS BAR ──
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  bar.style.width = pct + '%';
+});
 
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+// ── NAV SHADOW ON SCROLL ──
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 10);
+});
 
-  // Stagger post cards
-  document.querySelectorAll('.post-card').forEach((card, i) => {
-    card.style.transitionDelay = `${i * 0.06}s`;
-    card.classList.add('fade-up');
-    observer.observe(card);
+// ── BACK TO TOP ──
+const backTop = document.getElementById('back-top');
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('visible', window.scrollY > 400);
+});
+
+// ── ACTIVE NAV LINKS ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
   });
-</script>
+}, { rootMargin: '-30% 0px -60% 0px' });
 
+sections.forEach(s => navObserver.observe(s));
+
+// ── SCROLL REVEAL ──
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07 });
+
+document.querySelectorAll('.reveal, .reveal-group').forEach(el => revealObserver.observe(el));
+
+// ── SERIES ACCORDION ──
+function toggleSeries() {
+  document.getElementById('series-block').classList.toggle('open');
+}
+
+// ── TYPEWRITER HERO ──
+const phrases = [
+  "I work at the intersection of machine learning, AI safety, and systems thinking.",
+  "I write to understand — and to make ideas available to others.",
+  "Currently: thinking hard about agentic AI and what it means to build responsibly."
+];
+
+let phraseIdx = 0, charIdx = 0, deleting = false;
+const target = document.getElementById('typed-text');
+
+function type() {
+  const current = phrases[phraseIdx];
+  if (!deleting) {
+    target.textContent = current.slice(0, charIdx + 1);
+    charIdx++;
+    if (charIdx === current.length) {
+      deleting = true;
+      setTimeout(type, 2200);
+      return;
+    }
+    setTimeout(type, 28);
+  } else {
+    target.textContent = current.slice(0, charIdx - 1);
+    charIdx--;
+    if (charIdx === 0) {
+      deleting = false;
+      phraseIdx = (phraseIdx + 1) % phrases.length;
+      setTimeout(type, 400);
+      return;
+    }
+    setTimeout(type, 14);
+  }
+}
+
+setTimeout(type, 900);
+</script>
 </body>
 </html>
